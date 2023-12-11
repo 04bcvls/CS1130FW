@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Conversion | selivicbmc</title>
+        <style>
+
+            #homeHead{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                text-transform: uppercase;
+                font-weight: bold;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 9.5em;
+                text-decoration: none;
+            }
+
+            #homeHead1{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 16.2em;
+                text-decoration: none;
+            }
+
+            h1{
+                font-family: 'TT Squares', sans-serif;
+            }
+
+            body{
+                font-family: 'Gotham', sans-serif;
+                background-color: #febe98;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .container{
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                
+                background-color: whitesmoke;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                max-width: 500px;
+                /*position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);*/
+            }
+
+            h1 {
+                color: #000000;
+                position:absolute;
+                top: 5.5em;
+            }
+
+            form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 350px;
+            }
+
+            label {
+                font-size: 1em;
+                margin-bottom: 10px;
+                color: #2c1919;
+            }
+
+            input {
+                padding: 8px;
+                font-size: 1em;
+                width: calc(50% - 5px);
+                margin-bottom: 15px;
+                box-sizing: border-box;
+                border-radius: 2px;
+                text-align: right;
+            }
+
+            p {
+                font-size: 1.1em;
+                margin: 10px 0;
+                color: #ffffff;
+            }
+
+            /*.input-container, .result-container{
+                flex: 1;
+                padding: 10px;
+                box-sizing: border-box;
+                width: 100%;
+            }*/
+
+            .input-container{
+                display: flex;
+                align-items: baseline;
+                margin-right: 10px;
+            }
+
+            .result-container{
+                margin-left: 10px;
+            }
+
+            #equal-sign{
+                font-size: 2em;
+                margin-left: 9px;
+                margin-right: 9px;
+                margin-bottom: 10px;
+                color: #2c1919;
+            }
+
+            #resultOutput{
+                background-color: #eeeded;
+                font-weight: bold;
+            }
+
+            .dropOptions{
+                font-family: 'Gotham', sans-serif;
+            }
+
+            .typeSelect, .unitSelect{
+                padding: 5px;
+                font-family: 'Gotham', sans-serif;
+                font-weight: bold;
+                border-radius: 5px;
+                width: 35em;
+                text-align: center;
+            }
+
+
+        </style>
+    </head>
+    
+    <h1>CONVERSION</h1>
+    <body>
+        <div class="rowHeader">
+            <a id="homeHead" href="/Home/index.html">SELIVICMBC</a>
+            <a id="homeHead1" href="/Home/index.html">| Home</a>
+        </div>
+        <div class="container">
+            <div class="dropdowns">
+                <label for="convDbar">Select Conversion Type:</label>
+                <br>
+                <select id = "convType" class="typeSelect">
+                    <option value = "nullType" class="dropOptions">-- Select --</option>
+                    <option value = "temperature" class="dropOptions">Temperature</option>
+                    <option value = "length" class="dropOptions">Length</option>
+                </select>
+                <br><br>
+
+                <label for ="unitDbar">Select Unit Conversion: </label>
+                <br>
+                <select id ="convUnit" class = "unitSelect">
+                </select>
+                <br><br>
+            </div>
+            <div class="input-container">
+                <input type = "number" id = "userInput" class="dropOptions" placeholder="Put value here">
+                <label for = "equalSign" id="equal-sign">=</label>
+                <!--<span class="equal-sign">=</span>-->
+                <input type = "text" id = "resultOutput" class="dropOptions" placeholder="Result" readonly>
+            </div>
+        </div>
+        <script>
+            
+            var convTypeElement = document.getElementById("convType");
+            var convUnitElement = document.getElementById("convUnit");
+            var userInputElement = document.getElementById("userInput");
+            var resultOutputElement = document.getElementById("resultOutput");
+            var convunits = {
+                    temperature: ["Celsius (\u2103) to Fahrenheit (\u2109)", "Fahrenheit (\u2109) to Celsius (\u2103)"],
+                    length: ["Meters (m) to Feet (ft)", "Feet (ft) to Meters (m)"]
+                };
+
+            function modifyTypes(){
+                var convTypeValue = convTypeElement.value;
+                convUnitElement.innerHTML = "";
+
+                for(var index = 0; index < convunits[convTypeValue].length; index++){
+                    var option = document.createElement("option");
+                    option.text = convunits[convTypeValue][index];
+                    option.className = "dropOptions";
+                    convUnitElement.add(option);
+                }
+                
+                conversionResult();
+
+                /*if(convTypeValue === "temperature"){
+                    //userInputElement.removeAttribute("readonly");
+                    userInputElement.placeholder = "Put value here"
+
+                    var createUnit = document.createElement("option");
+                    createUnit.text = "Celsius (\u2103) to Fahrenheit (\u2109)";
+                    convUnitElement.add(createUnit);
+
+                    var createUnit1 = document.createElement("option");
+                    createUnit1.text = "Fahrenheit (\u2109) to Celsius (\u2103)";
+                    createUnit1.value = "FtoC"
+                    convUnitElement.add(createUnit1);
+                }
+                else if(convTypeValue === "length"){
+                    //userInputElement.removeAttribute("readonly");
+                    userInputElement.placeholder = "Put value here"
+
+                    var createUnit = document.createElement("option");
+                    createUnit.text = "Meters (m) to Feet (ft)";
+                    convUnitElement.add(createUnit);
+
+                    var createUnit1 = document.createElement("option");
+                    createUnit1.text = "Feet (ft) to Meters (m)";
+                    convUnitElement.add(createUnit1);
+                }
+                else{
+                    //userInputElement.setAttribute("readonly", "readonly");
+                    userInputElement.placeholder = "Identify units first"
+                }
+                */
+            }
+
+            function conversionResult() {
+            var convTypeValue = convTypeElement.value;
+            var convUnitValue = convUnitElement.value;
+            var userValue = document.getElementById("userInput").value.trim();
+            var res;
+
+            if (userValue === "") {
+                document.getElementById("resultOutput").value = ""; // Empty result if the input is empty
+            } else {
+                userValue = parseFloat(userValue);
+
+                if (isNaN(userValue)) {
+                    document.getElementById("resultOutput").value = ""; // Empty result if the input is not a number
+                } else {
+                    // Perform conversions when user input is provided
+                    if (convTypeValue === "temperature") {
+                        if (convUnitValue === "Celsius (\u2103) to Fahrenheit (\u2109)") {
+                            res = Math.round((userValue * 9 / 5) + 32);
+                            res = res + " \u2109";
+                        } else if (convUnitValue === "Fahrenheit (\u2109) to Celsius (\u2103)") {
+                            res = Math.round((userValue - 32) * 5 / 9);
+                            res = res + " \u2103";
+                        }
+                    } else if (convTypeValue === "length") {
+                        if (convUnitValue === "Meters (m) to Feet (ft)") {
+                            res = Math.round(userValue * 3.28084);
+                            res = res + " ft";
+                        } else if (convUnitValue === "Feet (ft) to Meters (m)") {
+                            res = Math.round(userValue / 3.28084);
+                            res = res + " m";
+                        }
+                    }
+
+                    // Display the result
+                    document.getElementById("resultOutput").value = res;
+                }
+            }
+        }
+
+        document.getElementById("userInput").addEventListener("keyup",
+            () => {
+                conversionResult();
+            });
+        document.getElementById("convType").addEventListener("change", modifyTypes);
+        document.getElementById("convUnit").addEventListener("change", conversionResult);
+            
+
+            
+        </script>
+    </body>
+</html>

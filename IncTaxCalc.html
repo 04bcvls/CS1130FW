@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Income Tax Calculator | selivicbmc</title>
+        <style>
+
+            #homeHead{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                text-transform: uppercase;
+                font-weight: bold;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 9.5em;
+                text-decoration: none;
+            }
+
+            #homeHead1{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 16.2em;
+                text-decoration: none;
+            }
+
+            h1{
+                font-family: 'TT Squares', sans-serif;
+            }
+
+            body{
+                font-family: 'Gotham', sans-serif;
+                background-color: #febe98;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .main-container{
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                
+                background-color: whitesmoke;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                max-width: 500px;
+                /*position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);*/
+            }
+
+            #itc {
+                color: #000000;
+                position:absolute;
+                top: 4.3em;
+            }
+
+            h1 {
+                color: #000000;
+                top: 5.5em;
+            }
+
+            form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 350px;
+            }
+
+            label {
+                font-size: 1em;
+                margin-bottom: 10px;
+                color: #2c1919;
+            }
+
+            input {
+                padding: 8px;
+                font-size: 1em;
+                width: calc(95% - 5px);
+                margin-bottom: 15px;
+                box-sizing: border-box;
+                text-align: right;
+            }
+
+            button {
+                padding: 9px;
+                font-size: 1em;
+                background-color: #002173;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover{
+                background-color: #1a284a;
+            }
+
+            .iTaxRes{
+                height: 105px; /* Set a fixed height for the result container */
+                overflow: hidden; /* Hide overflow content */
+            }
+
+            #res, #res1{
+                font-family: 'Gotham', sans-serif;
+                font-weight: bold;
+                font-size: 1.1em;
+                color: #000000;
+                text-align: right;
+            }
+
+            #redReq{
+                font-size: 0.8em;
+                color: #ff2e2e;
+            }
+
+            #required{
+                color: #ff2e2e;
+            }
+
+        </style>
+    </head>
+        
+    <h1 id = "itc">Income Tax Calculator</h1>
+    <body>
+        <div class="rowHeader">
+            <a id="homeHead" href="/Home/index.html">SELIVICMBC</a>
+            <a id="homeHead1" href="/Home/index.html">| Home</a>
+        </div>
+        <div class="main-container">
+            <form id="iTaxForm">
+                <label for = "annualIncome">Your Annual Income (in Philippine Peso)</label>
+                <span id="required">*</span>
+                <br><br>
+                <label for = "pesoUnicode">&#8369;</label>
+                <input type = "number" id = "userInput" placeholder = "Income (&#8369;)">
+                <br>
+                <button type = "button" id="calculateButton">Calculate</button>
+                <p id="redReq">* required</p>
+            </form>
+
+            <div class="iTaxRes">
+                <h1 id = "res"></h1>
+                <h1 id = "res1">Your Income Tax will display HERE</h1>
+            </div>
+
+        </div>
+        <script>
+            function calculateIncomeTax(){
+                const userIncome = parseFloat(document.getElementById("userInput").value);
+
+                let incomeTax = 0.0;
+                let incomeAfterTax = 0.0;
+                
+
+                if (userIncome <= 250000){
+                    incomeTax = 0;
+                }
+                else if (userIncome <= 400000){
+                    incomeTax = 0.2 * (userIncome - 250000);
+                }
+                else if (userIncome <= 800000){
+                    incomeTax = 30000 + 0.25 * (userIncome - 400000);
+                }
+                else if (userIncome <= 2000000){
+                    incomeTax = 130000 + 0.3 * (userIncome - 800000);
+                }
+                else if (userIncome <= 8000000){
+                    incomeTax = 490000 + 0.32 * (userIncome - 2000000);
+                }
+                else{
+                    incomeTax = 2410000 + 0.35 * (userIncome - 8000000);
+                }
+            
+                document.getElementById("res").innerText = 'Income Tax:\n\u20b1' + incomeTax.toFixed(2);
+                incomeAfterTax = userIncome - incomeTax;
+                document.getElementById("res1").innerText = 'Your Income after Tax Deduction:\n\u20b1' + incomeAfterTax.toFixed(2);
+
+            }
+
+            function enterKeyEvent(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    calculateIncomeTax();
+                }
+            }
+        
+        
+        document.getElementById("userInput").addEventListener("keydown", (event)=>{
+            enterKeyEvent(event);
+        });
+        document.getElementById("calculateButton").addEventListener("click", calculateIncomeTax);
+
+        </script>
+
+    </body>
+</html>

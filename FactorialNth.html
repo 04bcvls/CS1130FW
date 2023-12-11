@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Factorial, Sum, and Average | selivicbmc</title>
+        <style>
+            #homeHead{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                text-transform: uppercase;
+                font-weight: bold;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 9.5em;
+                text-decoration: none;
+            }
+
+            #homeHead1{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 16.2em;
+                text-decoration: none;
+            }
+
+            #fsa {
+                font-family: 'TT Squares', sans-serif;
+                position: absolute;
+                top: 6em;
+            }
+
+            body {
+                font-family: 'Gotham', sans-serif;
+                background-color: #febe98;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .content-wrapper {
+                display: flex;
+                justify-content: space-between;
+                width: 60%; /* Adjust the width as needed */
+            }
+
+            .left-section {
+                background-color: #ffffff;
+                padding: 13px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 30%; /* Adjust the width as needed */
+                margin-bottom: 10px;
+            }
+
+            .right-section {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 60%; /* Adjust the width as needed */
+                margin-bottom: 10px;
+                
+            }
+
+            .left-section label,
+            .left-section input,
+            .left-section button {
+                padding: 5px;
+                font-size: 1em;
+                display: flex;
+                margin-bottom: 7px;
+                margin-left: 20px;
+                text-align: right;
+                
+            }
+
+            .compiledResults {
+                text-align: left;
+                font-weight: bold;
+            }
+
+            #calculateButton{
+                padding: 9px;
+                font-size: 1em;
+                background-color: #002173;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #calculateButton:hover{
+                background-color: #1a284a;
+            }
+            
+
+
+
+        </style>
+    </head>
+        <h1 id = "fsa">Factorial, Sum, and Average of First N Natural Numbers</h1>
+    <body>
+        <div class="rowHeader">
+            <a id="homeHead" href="index.html">SELIVICMBC</a>
+            <a id="homeHead1" href="/Home/index.html">| Home</a>
+        </div>
+        <div class="content-wrapper">
+            <div class="left-section">
+                <label for="enterInteger">Enter an integer (&#8469;): </label>
+                <input type="number" id="userNumber" min="0" step="1" placeholder="Put integer value here">
+                <button type="button" id="calculateButton">Calculate</button>
+            </div>
+    
+            <div class="right-section">
+                <div class="compiledResults">
+                    <p id="factorialRes">Factorial: </p>
+                    <p id="sumRes">Sum: </p>
+                    <p id="averageRes">Average: </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function calculateNth(){
+                var num = parseInt(document.getElementById('userNumber').value);
+                var userNum = document.getElementById("userNumber").value
+                var factor = 1;
+                var i = 1;
+
+                var sum = 0;
+                var val = 1;
+
+                var ave = 0;
+
+                if (isNaN(num) || isNaN(userNum)) {
+                    num = 0;
+                    document.getElementById("factorialRes").innerHTML = 'Factorial: '
+                    document.getElementById("sumRes").innerHTML = 'Sum: '
+                    document.getElementById("averageRes").innerHTML = 'Average: '
+                }
+
+                //Factorial in While Loop
+                while(i<=num){
+                    factor *= i;
+                    i++;
+                }
+
+                //Sum in Do Loop
+                if(num !== 0){     
+                    do{
+                        sum+=val;
+                        val++;
+                    }while(val<=num);
+                }
+
+                //Average in For Loop
+                if (num !== 0) {
+                    for (var nu = 1; nu <= num; nu++) {
+                        ave += nu;
+                    }
+                    ave /= num;
+                }
+
+                document.getElementById("factorialRes").innerHTML = 'Factorial: ' + factor;
+                document.getElementById("sumRes").innerHTML = 'Sum: ' + sum;
+                document.getElementById("averageRes").innerHTML = 'Average: ' + ave.toFixed(0);
+            }
+
+            function enterKeyEvent(event){
+                if(event.keyCode === 13){
+                    calculateNth();
+                }
+            }
+
+        document.getElementById("calculateButton").addEventListener("click", calculateNth);
+        document.getElementById("userNumber").addEventListener("keyup", enterKeyEvent);
+
+        </script>
+
+    </body>
+</html>

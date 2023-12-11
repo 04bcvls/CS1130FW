@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Payroll | selivicbmc</title>
+        <style>
+            #homeHead{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                text-transform: uppercase;
+                font-weight: bold;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 9.5em;
+                text-decoration: none;
+            }
+
+            #homeHead1{
+                font-family: "Gotham", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                color:black;
+                position: absolute;
+                top: 1.9em;
+                left: 16.2em;
+                text-decoration: none;
+            }
+
+            #simpay{
+                font-family: 'TT Squares', sans-serif;
+                position: absolute;
+                top: 2em; /* Adjust the top margin as needed */
+                right: 20em;
+            }
+            .content-wrapper{
+                display: flex;
+                justify-content: space-between;
+                margin: 8em 30px 30px;
+            }
+
+            .leftcontainer{
+                width:60%;
+                box-sizing: border-box;
+            }
+
+            .rightcontainer{
+                width:37%;
+                box-sizing: border-box;
+            }
+
+            body{
+                font-family: 'Gotham', sans-serif;
+                background-color: #febe98;
+                margin:0;
+            }
+
+            .sectionLeft {
+                box-shadow: 0 0 15px #00000045;
+                background-color: #ffffff;
+                border-radius: 5px;
+                padding: 20px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                width: 100%; /* Adjust as needed */
+                box-sizing: border-box;
+            }
+
+            .sectionRight{
+                box-shadow: 0 0 15px #00000045;
+                background-color: #ffffff;
+                border-radius: 5px;
+                padding: 30px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                /*justify-content: flex-start;*/
+                width: 100%; /* Adjust as needed */
+                box-sizing: border-box;
+            }
+
+            .sectionRight select,
+            .sectionRight input,
+            .sectionRight button {
+                width: 95%;
+            }
+
+            h1 {
+                margin: 0;
+                color: #333333;
+            }
+
+            #clearList {
+                background-color: #b10000; /* Change to your desired color */
+                color: #ffffff; /* Change to your desired text color */
+                /* Add any other styling properties as needed */
+            }
+
+            #clearList:hover {
+                background-color: #710000; 
+            }
+            button{
+                padding: 5px;
+                font-size: 1em;
+                background-color: #002173;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover{
+                background-color: #1a284a;
+            }
+
+            select, input {
+                padding: 4px;
+                margin: 2px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                display: block;
+                width: 10px; /* Adjusted width */
+                margin-bottom: 10px;
+                text-align: right;
+            }
+
+            button{
+                padding: 4px;
+                margin: 2px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                display: block;
+                width: 10px; /* Adjusted width */
+                margin-bottom: 10px;
+            }
+
+            #redRequired{
+                color:#ff2e2e;
+            }
+
+            /*TABLE STYLES*/
+            table {
+                font-size: 12px;
+                border-collapse: collapse;
+            }
+
+            tr {
+                text-align: center;
+                border: 1px solid #9c0000;
+            }
+
+            td, th {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid #9c0000;
+            }
+
+            /*MODAL STYLES*/
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 101;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+            }
+
+            .modal-content {
+                font-weight: bold;
+                background-color: #dddcdc;
+                border: 1px solid #2e2e2e;
+                border-radius: 5px;
+                justify-content: center;
+                align-items: center;
+                margin: 15% auto;
+                margin-top: 12%;
+                padding: 3% 3% 3% 3%;
+                width: 30%;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .modal-content button {
+                width: 80px; /* Adjust as needed */
+                margin: 5px;
+            }
+
+            .modal-content table {
+                width: 100%;
+            }
+
+            .modal-content span {
+                color: #555555;
+                margin-top: -10px;
+                font-size: 22px;
+                cursor: pointer;
+                float: right;
+                display: block;
+            }
+
+            #confirmModal {
+                background-color: #002173;
+                color: white;
+            }
+
+            #confirmModal:hover {
+                background-color: rgb(5, 23, 68);
+            }
+
+            #cancelModal {
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                color: black;
+            }
+
+            #cancelModal:hover {
+                background-color: #dddddd;
+            }
+
+            .modal-content .button-row {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .highlight {
+                background-color: #ffff99;
+            }
+
+            #result-feedback {
+                color: #4caf50;
+            }
+
+            #cart table {
+                width: 100%;
+            }
+
+        </style>
+    </head>
+        <h1 id="simpay">Simple Payroll</h1>
+    <body>
+        <div class="rowHeader">
+            <a id="homeHead" href="index.html">SELIVICMBC</a>
+            <a id="homeHead1" href="/Home/index.html">| Home</a>
+        </div>
+        <div class="content-wrapper">
+            <div class="leftcontainer">
+                <div class="sectionLeft">
+                    <h2>Payroll List</h2>
+                    <br>
+                    <table id="employeeTable">
+                        <tr>
+                            <th>No.</th>
+                            <th>Employee Name</th>
+                            <th>Days Worked</th>
+                            <th>Daily Rate</th>
+                            <th>Gross Pay</th>
+                            <th>Deduction Amount</th>
+                            <th>Net Pay</th>
+                        </tr>
+                    </table>
+                    <br><br>
+                </div>
+            </div>
+            <div class="rightcontainer">
+                <div class="sectionRight">
+                    <h2>Add Employee</h2>
+                    <form id="employeeForm">
+                        <label for="employeeName">Employee Name</label>
+                        <span id="redRequired">*</span>
+                        <input type="text" id="name" placeholder="Full Name" required>
+                        
+                        <label for="daysWorked">Days Worked</label>
+                        <span id="redRequired">*</span>
+                        <input type="number" id="daysWorked" placeholder="Number of Days" required>
+                        
+                        <label for="dailyRate">Daily Rate</label>
+                        <span id="redRequired">*</span>
+                        <input type="number" id="dailyRate" placeholder="Rate in Philippine Peso (&#8369;)" required>
+                        
+                        <label for="dedAmount">Deduction Amount</label>
+                        <span id="redRequired">*</span>
+                        <input type="number" id="deduction" placeholder="Amount in Philippine Peso (&#8369;)" required>
+                        <button type="submit">Add</button>
+                    </form>
+                    <h2>Remove Employee</h2>
+                    <form id="removeForm">
+                        <input type="number" id="lineNumber" placeholder="Employee No." required>
+                        <button class="caution-color" type="submit">Remove</button>
+                    </form>
+                    <button class="caution-color" id="clearList">Clear Payroll List</button>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close block right">&#9447;</span>
+                <br><br>
+                <p id="modal-warning"></p>
+                <br><br>
+                <div class="buttonRow">
+                    <button id="confirmModal">Yes</button>
+                    <button id="cancelModal">No</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var tableList = document.getElementById('employeeTable');
+
+            document.getElementById('employeeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var name, numWorkDays, numRate, deduction;
+            
+            name = document.getElementById('name').value;
+            numWorkDays = document.getElementById('daysWorked').value;
+            numRate = Number(document.getElementById('dailyRate').value);
+            deduction = Number(document.getElementById('deduction').value);
+
+            var grossPay = numWorkDays * numRate;
+            var netPay = grossPay - deduction;
+
+            var row = tableList.insertRow(-1);
+
+            row.insertCell(0).innerText = tableList.rows.length - 1;
+            row.insertCell(1).innerText = name;
+            row.insertCell(2).innerText = numWorkDays;
+            row.insertCell(3).innerText = '\u20b1 ' + numRate.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            row.insertCell(4).innerText = '\u20b1 ' + grossPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            row.insertCell(5).innerText = '\u20b1 ' + deduction.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            row.insertCell(6).innerText = '\u20b1 ' + netPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            updateLineNumbers(tableList)
+            document.getElementById('name').value = '';
+            document.getElementById('daysWorked').value = '';
+            document.getElementById('dailyRate').value = '';
+            document.getElementById('deduction').value = '';
+        });
+
+        document.getElementById('lineNumber').addEventListener('input', function () {
+            this.setCustomValidity('');
+        });
+
+        document.getElementById('removeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var lineNumberInput = document.getElementById('lineNumber');
+            var lineNumber = document.getElementById('lineNumber').value;
+
+            if (lineNumber < 1 || lineNumber > tableList.rows.length - 1) {
+                lineNumberInput.setCustomValidity('Employee No. does not exist.');
+                lineNumberInput.reportValidity();
+                return;
+            }
+
+            modalOperation = 'deleteEmployee';
+            var tableHeaderHTML = document.querySelector('#employeeTable tr:first-child').outerHTML;
+            var selectedRow = document.querySelector('#employeeTable tr:nth-child(' + (parseInt(lineNumber) + 1) + ')');
+            var selectedRowHTML = selectedRow.outerHTML;
+            document.getElementById('modal-warning').innerHTML = 'Do you want to delete Employee No. ' + lineNumber + '?';
+
+            modal.style.display = "block";
+        });
+
+        document.getElementById('clearList').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            modalOperation = 'clearList';
+            document.getElementById('modal-warning').innerHTML = 'Do you want to clear Payroll List?';
+            modal.style.display = "block";
+        });
+
+        function deleteEmployee() {
+            var lineNumber = document.getElementById('lineNumber').value;
+
+            if (lineNumber > 0 && lineNumber < tableList.rows.length) {
+                tableList.deleteRow(lineNumber);
+            }
+
+            document.getElementById('lineNumber').value = '';
+            updateLineNumbers(tableList);
+        }
+
+        function payrollDelete() {
+            var tableList = document.getElementById('employeeTable');
+            for (var i = tableList.rows.length - 1; i > 0; i--) {
+                tableList.deleteRow(i);
+            }
+        }
+
+        function updateLineNumbers(tableList) {
+            for (var i = 1; i < tableList.rows.length; i++) {
+                tableList.rows[i].cells[0].innerText = i;
+            }
+        }
+
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+        var confirmBtn = document.getElementById("confirmModal");
+        var cancelBtn = document.getElementById("cancelModal");
+        var modalOperation = '';
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        confirmBtn.onclick = function() {
+            switch (modalOperation) {
+                case 'deleteEmployee':
+                    deleteEmployee();
+                    break;
+                case 'clearList':
+                    payrollDelete();
+                    break;
+            }
+
+            modal.style.display = "none";
+        }
+
+        cancelBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        </script>
+
+        
+    </body>
+</html>
