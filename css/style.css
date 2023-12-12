@@ -109,9 +109,9 @@ h3{
   }
 }
 
-@font-face {font-family: Gotham; font-weight: bold; src: url(./fonts/GothamBold.ttf);}
+@font-face {font-family: Gotham-Bold; src: url(./fonts/GothamBold.ttf);}
 .gtco-nav #gtco-logo {
-  font-family: "Gotham", sans-serif;
+  font-family: "Gotham-Bold", sans-serif;
   font-size: 20px;
   margin: 0;
   padding: 0;
