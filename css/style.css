@@ -284,11 +284,11 @@ h3{
   color: #000 !important;
 }
 .gtco-social a:hover, .gtco-social a:focus, .gtco-social a:active, .gtco-social li a:hover, .gtco-social li a:focus, .gtco-social li a:active {
-  color: #52D681 !important;
+  color: #3A956E !important;
 }
 
 #gtco-intro h2 {
-  margin: 0 0 30px 0;
+  margin: 0 0 30px 50px;
   padding: 0;
   line-height: 1.2;
   font-size: 55px;
@@ -419,9 +419,9 @@ h3{
   right: 0;
   top: 0;
   z-index: 8;
-  background: -webkit-linear-gradient(top right, #52D681, #1FDEDB);
-  background: -webkit-gradient(linear, right top, left bottom, from(#52D681), to(#1FDEDB));
-  background: linear-gradient(top right, #52D681, #1FDEDB);
+  background: -webkit-linear-gradient(top right, #014D4E, #437099);
+  background: -webkit-gradient(linear, right top, left bottom, from(#014D4E), to(#437099));
+  background: linear-gradient(top right, #014D4E, #437099);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -525,7 +525,7 @@ h3{
   color: #000;
 }
 #fh5co-footer a:hover, #fh5co-footer a:active, #fh5co-footer a:focus {
-  color: #52D681;
+  color: #3A956E;
 }
 #fh5co-footer .fh5co-footer-widget {
   float: left;
@@ -802,17 +802,17 @@ h3{
 }
 
 .btn-gradient {
-  background: -webkit-linear-gradient(top right, #52D681, #1FDEDB);
-  background: -webkit-gradient(linear, right top, left bottom, from(#52D681), to(#1FDEDB));
-  background: linear-gradient(top right, #52D681, #1FDEDB);
+  background: -webkit-linear-gradient(top right, #3A956E, #7E7DB0);
+  background: -webkit-gradient(linear, right top, left bottom, from(#3A956E), to(#7E7DB0));
+  background: linear-gradient(top right, #3A956E, #7E7DB0);
   color: rgba(255, 255, 255, 0.7);
   border: none !important;
 }
 .btn-gradient:hover, .btn-gradient:focus, .btn-gradient:active {
   color: #fff;
-  background: -webkit-linear-gradient(top right, #52D681, #1FDEDB);
-  background: -webkit-gradient(linear, right top, left bottom, from(#52D681), to(#1FDEDB));
-  background: linear-gradient(top right, #52D681, #1FDEDB);
+  background: -webkit-linear-gradient(top right, #0E7163, #437099);
+  background: -webkit-gradient(linear, right top, left bottom, from(#0E7163), to(#437099));
+  background: linear-gradient(top right, #0E7163, #0E7163);
 }
 
 .btn-special {
@@ -918,5 +918,3 @@ h3{
 .js .animate-box {
   opacity: 0;
 }
-
-/*# sourceMappingURL=style.css.map */
