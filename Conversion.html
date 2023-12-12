@@ -58,10 +58,6 @@
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 padding: 20px;
                 max-width: 500px;
-                /*position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);*/
             }
 
             h1 {
@@ -99,13 +95,6 @@
                 margin: 10px 0;
                 color: #ffffff;
             }
-
-            /*.input-container, .result-container{
-                flex: 1;
-                padding: 10px;
-                box-sizing: border-box;
-                width: 100%;
-            }*/
 
             .input-container{
                 display: flex;
@@ -200,37 +189,6 @@
                 }
                 
                 conversionResult();
-
-                /*if(convTypeValue === "temperature"){
-                    //userInputElement.removeAttribute("readonly");
-                    userInputElement.placeholder = "Put value here"
-
-                    var createUnit = document.createElement("option");
-                    createUnit.text = "Celsius (\u2103) to Fahrenheit (\u2109)";
-                    convUnitElement.add(createUnit);
-
-                    var createUnit1 = document.createElement("option");
-                    createUnit1.text = "Fahrenheit (\u2109) to Celsius (\u2103)";
-                    createUnit1.value = "FtoC"
-                    convUnitElement.add(createUnit1);
-                }
-                else if(convTypeValue === "length"){
-                    //userInputElement.removeAttribute("readonly");
-                    userInputElement.placeholder = "Put value here"
-
-                    var createUnit = document.createElement("option");
-                    createUnit.text = "Meters (m) to Feet (ft)";
-                    convUnitElement.add(createUnit);
-
-                    var createUnit1 = document.createElement("option");
-                    createUnit1.text = "Feet (ft) to Meters (m)";
-                    convUnitElement.add(createUnit1);
-                }
-                else{
-                    //userInputElement.setAttribute("readonly", "readonly");
-                    userInputElement.placeholder = "Identify units first"
-                }
-                */
             }
 
             function conversionResult() {
@@ -279,7 +237,9 @@
         document.getElementById("convType").addEventListener("change", modifyTypes);
         document.getElementById("convUnit").addEventListener("change", conversionResult);
             
-
+        </script>
+    </body>
+</html>
             
         </script>
     </body>
