@@ -330,15 +330,15 @@
             var grossPay = numWorkDays * numRate;
             var netPay = grossPay - deduction;
 
-            var row = tableList.insertRow(-1);
+            var tableRow = tableList.insertRow(-1);
 
-            row.insertCell(0).innerText = tableList.rows.length - 1;
-            row.insertCell(1).innerText = name;
-            row.insertCell(2).innerText = numWorkDays;
-            row.insertCell(3).innerText = '\u20b1 ' + numRate.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            row.insertCell(4).innerText = '\u20b1 ' + grossPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            row.insertCell(5).innerText = '\u20b1 ' + deduction.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            row.insertCell(6).innerText = '\u20b1 ' + netPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            tableRow.insertCell(0).innerText = tableList.rows.length - 1;
+            tableRow.insertCell(1).innerText = name;
+            tableRow.insertCell(2).innerText = numWorkDays;
+            tableRow.insertCell(3).innerText = '\u20b1 ' + numRate.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            tableRow.insertCell(4).innerText = '\u20b1 ' + grossPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            tableRow.insertCell(5).innerText = '\u20b1 ' + deduction.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            tableRow.insertCell(6).innerText = '\u20b1 ' + netPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             
             updateLineNumbers(tableList)
             document.getElementById('name').value = '';
@@ -358,7 +358,7 @@
             var lineNumber = document.getElementById('lineNumber').value;
 
             if (lineNumber < 1 || lineNumber > tableList.rows.length - 1) {
-                lineNumberInput.setCustomValidity('Employee No. does not exist.');
+                lineNumberInput.setCustomValidity('Employee # does not exist.');
                 lineNumberInput.reportValidity();
                 return;
             }
@@ -367,7 +367,7 @@
             var tableHeaderHTML = document.querySelector('#employeeTable tr:first-child').outerHTML;
             var selectedRow = document.querySelector('#employeeTable tr:nth-child(' + (parseInt(lineNumber) + 1) + ')');
             var selectedRowHTML = selectedRow.outerHTML;
-            document.getElementById('modal-warning').innerHTML = 'Do you want to delete Employee No. ' + lineNumber + '?';
+            document.getElementById('modal-warning').innerHTML = 'Do you want to delete Employee # ' + lineNumber + '?';
 
             modal.style.display = "block";
         });
@@ -405,7 +405,7 @@
         }
 
         var modal = document.getElementById("myModal");
-        var span = document.getElementsByClassName("close")[0];
+        var span = document.getElementsByClassName("closeIcon")[0];
         var confirmBtn = document.getElementById("confirmModal");
         var cancelBtn = document.getElementById("cancelModal");
         var modalOperation = '';
